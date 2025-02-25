@@ -1,0 +1,73 @@
+---
+title: "HW Class 6 (R Functions)"
+author: "Ruth Barnes: A16747659"
+date: "Janurary 23, 2025"
+format: pdf
+---
+
+# HW Class 6 (R Functions) 
+
+***Q6. How would you generalize the original code below to work with any set of input protein structures?***
+
+
+```{r}
+library(bio3d)
+
+#read in pdb structures
+s1 <- read.pdb("4AKE")  # kinase with drug 
+s2 <- read.pdb("1AKE")  # kinase no drug 
+s3 <- read.pdb("1E4Y")  # kinase with drug 
+
+#trimming the PDB structures to a smaller subset of atoms 
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA") 
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA") 
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA") 
+
+#selecting atom b 
+s1.b <- s1.chainA$atom$b 
+s2.b <- s2.chainA$atom$b 
+s3.b <- s3.chainA$atom$b 
+
+#plot atom b
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor") 
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor") 
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+
+
+```
+
+## Write function to improve above code
+```{r}
+library(bio3d)
+
+plot_PDB_protein <- function(pdb_code){
+  
+  #read in pdb code using the function read.pdb(), with input being pdb_code
+  
+  s <- read.pdb(pdb_code)
+  
+  #trimming the PDB structures to a smaller subset of atoms using trim.pdb(), with input being s, chain = "A", and elety = "CA"
+  
+  s.chainA <- trim.pdb(s, chain = "A", elety = "CA") 
+  
+  #selecting beta factor for atom
+  
+  s.b <- s.chainA$atom$b 
+  
+  #plot the beta factor, with input being s.b, sse=s.chainA, type = "l", and ylab = "Bfactor"
+
+  plotb3(x = s.b, sse=s.chainA, type = "l", ylab = "Bfactor") 
+  
+}
+
+```
+
+# Use/test the written function
+```{r}
+#apply the function to the three proteins to output plots
+
+sapply(X = c("4AKE", "1AKE", "1E4Y"), FUN = plot_PDB_protein)
+```
+
+
+
