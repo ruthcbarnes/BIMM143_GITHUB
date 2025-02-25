@@ -1,0 +1,313 @@
+---
+title: "Class 14: RNA-Seq analysis mini-project"
+author: "Ruth Barnes: A16747659"
+format: pdf
+toc: true
+---
+
+# Background 
+
+The data for hands-on session comes from GEO entry: GSE37704, which is associated with the following publication:
+
+> Trapnell C, Hendrickson DG, Sauvageau M, Goff L et al. "Differential analysis of gene regulation at transcript resolution with RNA-seq". Nat Biotechnol 2013 Jan;31(1):46-53. PMID: 23222703
+
+The authors report on differential analysis of lung fibroblasts in response to loss of the developmental transcription factor HOXA1. Their results and others indicate that HOXA1 is required for lung fibroblast and HeLa cell cycle progression. In particular their analysis show that "loss of HOXA1 results in significant expression level changes in thousands of individual transcripts, along with isoform switching events in key regulators of the cell cycle". For our session we have used their Sailfish gene-level estimated counts and hence are restricted to protein-coding genes only.
+
+
+# Data Import
+
+```{r}
+counts <- read.csv("GSE37704_featurecounts.csv", row.names=1)
+colData <- read.csv("GSE37704_metadata.csv")
+```
+
+# Inspect and Tidy Data
+
+Does the `counts` columns match the `colData` rows?
+
+```{r}
+head(counts)
+```
+
+```{r}
+colData$id
+```
+
+```{r}
+colnames(counts)
+```
+
+**Q. Complete the code below to remove the troublesome first column from countData**
+
+The fix here looks to be removing the first "length" column from counts:
+
+```{r}
+countData <- counts[,-1]
+head(countData)
+```
+
+Check for matching countData and colData: 
+
+```{r}
+colnames(countData) == colData$id
+```
+
+**Q. How many genes in total?**
+
+```{r}
+nrow(countData)
+```
+
+**Q. Filter to remove zero count genes (rows where there are zero counts in all columns). How many genes are left** 
+and
+**Q. Complete the code below to filter countData to exclude genes (i.e. rows) where we have 0 read count across all samples (i.e. columns).**
+
+
+```{r}
+to.keep.inds <- rowSums(countData) > 0
+```
+
+```{r}
+new.counts <- countData[to.keep.inds,]
+```
+
+```{r}
+nrow(new.counts)
+```
+
+# Setup for DESeq
+
+```{r}
+#| message: false
+library(DESeq2)
+```
+
+Setup input object for DESeq:
+```{r}
+dds <- DESeqDataSetFromMatrix(countData = new.counts,
+                              colData = colData,
+                              design = ~condition)
+```
+
+# Run DESeq
+
+```{r}
+dds <- DESeq(dds)
+res <- results(dds)
+```
+
+```{r}
+head(res)
+```
+
+**Q. Call the summary() function on your results to get a sense of how many genes are up or down-regulated at the default 0.1 p-value cutoff.**
+
+```{r}
+summary(res)
+```
+
+# Volcano Plot of Results
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ggplot(res) +
+  aes(log2FoldChange, -log(res$padj)) +
+  geom_point()
+```
+
+**Q. Improve this plot by completing the below code, which adds color and axis labels.**
+
+```{r}
+mycols <- rep("grey", nrow(res))
+mycols[res$log2FoldChange >= 2] <- "red"
+mycols[res$log2FoldChange <= -2] <- "blue"
+mycols[res$padj > 0.005] <- "gray"
+```
+
+```{r}
+ggplot(res) +
+  aes(log2FoldChange, -log(padj)) +
+  geom_point(col=mycols) + 
+  geom_vline(xintercept = c(-2,2), col="red", linetype = "dashed") +
+  geom_hline(yintercept = -log(0.005), col = "red", linetype = "dashed")
+```
+
+# Gene Annotation
+
+```{r}
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+```
+
+
+```{r}
+columns(org.Hs.eg.db)
+```
+
+**Q. Use the mapIDs() function multiple times to add SYMBOL, ENTREZID and GENENAME annotation to our results by completing the code below.**
+
+Add gene SYMBOL and ENTREZID 
+
+```{r}
+columns(org.Hs.eg.db)
+
+res$symbol = mapIds(org.Hs.eg.db,
+                    keys=rownames(res), 
+                    keytype="ENSEMBL",
+                    column="SYMBOL")
+
+res$entrez = mapIds(org.Hs.eg.db,
+                    keys=rownames(res),
+                    keytype="ENSEMBL",
+                    column="ENTREZID")
+
+res$name =   mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",,
+                    column="ENTREZID")
+
+head(res, 10)
+```
+
+**Q. Finally for this section let's reorder these results by adjusted p-value and save them to a CSV file in your current project directory.**
+
+```{r}
+res = res[order(res$pvalue),]
+write.csv(res, file="deseq_results.csv")
+```
+
+```{r}
+#| message: false
+head(read.csv("deseq_results.csv"))
+```
+
+
+# Pathway Analysis
+
+```{r}
+library(gage)
+library(gageData)
+library(pathview)
+```
+
+Input vector for `gage()`:
+
+```{r}
+foldchanges = res$log2FoldChange
+names(foldchanges) = res$entrez
+```
+
+Load up the KEGG gene-sets:
+
+```{r}
+data(kegg.sets.hs)
+```
+
+Run pathway analysis:
+
+```{r}
+keggres = gage(foldchanges, gsets=kegg.sets.hs)
+```
+
+```{r}
+head(keggres$less)
+```
+
+Cell cycle figure:
+
+```{r}
+pathview(foldchanges, pathway.id = "hsa04110")
+```
+
+Insert this figure:
+
+![](hsa04110.pathview.png)
+
+Change the display in various ways including generating a PDF graph:
+
+```{r}
+# A different PDF based output of the same data
+pathview(gene.data=foldchanges, pathway.id="hsa04110", kegg.native=FALSE)
+```
+
+```{r}
+## Focus on top 5 upregulated pathways here for demo purposes only
+keggrespathways <- rownames(keggres$greater)[1:5]
+
+# Extract the 8 character long IDs part of each string
+keggresids = substr(keggrespathways, start=1, stop=8)
+keggresids
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id=keggresids, species="hsa")
+```
+
+Insert images: 
+![](hsa04640.pathview.png)
+
+![](hsa05146.pathview.png)
+
+![](hsa05332.pathview.png)
+
+
+**Q. Can you do the same procedure as above to plot the pathview figures for the top 5 down-regulated pathways?**
+
+Down-regulated pathways: 
+
+1. 
+![](hsa04110.pathview.png)
+
+2. 
+```{r}
+pathview(foldchanges, pathway.id = "hsa03030")
+```
+![](hsa03030.pathview.png)
+
+
+3.
+```{r}
+pathview(foldchanges, pathway.id = "hsa05130")
+
+```
+
+![](hsa05130.pathview.png)
+
+4. 
+```{r}
+pathview(foldchanges, pathway.id = "hsa03013")
+```
+
+![](hsa03013.pathview.png)
+
+5. 
+```{r}
+pathview(foldchanges, pathway.id = "hsa03440")
+```
+
+![](hsa03440.pathview.png)
+
+
+# Gene Ontology Analysis
+
+Run pathway analysis with GO
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchanges, gsets=gobpsets, same.dir=TRUE)
+
+head(gobpres$less)
+```
+
+
+
+
+

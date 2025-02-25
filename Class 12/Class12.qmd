@@ -1,0 +1,35 @@
+---
+title: "Class 12: Pt.1 (RNASeq Galaxy)"
+author: "Ruth Barnes:A16747659"
+format: html
+---
+
+```{r}
+mxl <- read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(mxl)
+```
+
+```{r}
+table(mxl$Genotype..forward.strand.)
+```
+
+
+```{r}
+table(mxl$Genotype..forward.strand.) / nrow(mxl)
+```
+
+Lets look at GBR
+
+```{r}
+gbr <- read.csv("373522-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(gbr)
+```
+
+
+```{r}
+round(table(gbr$Genotype..forward.strand.) / nrow(gbr) * 100, 2)
+```
+
+
+
+

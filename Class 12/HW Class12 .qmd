@@ -1,0 +1,112 @@
+---
+title: "HW Class 12 Pt.2: Population Analysis"
+author: "Ruth Barnes: A16747659"
+format: pdf
+---
+
+# Class 12 Pt. 1: RNASeq Galaxy
+
+Download and read a CSV from ENSEMBLE:
+
+```{r}
+mxl <- read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(mxl)
+```
+
+How many of each genotype are there?
+
+```{r}
+table(mxl$Genotype..forward.strand.)
+```
+
+Proportion or percent of total for each genotype:
+
+```{r}
+table(mxl$Genotype..forward.strand.) / nrow(mxl) * 100
+```
+
+This variant that is associated with childhood asthma is more frequent in the GBR population than the MKL population.
+
+```{r}
+gbr <- read.csv("373522-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(gbr)
+```
+
+Let's now dig into this further.
+
+# Class 12 Pt. 2: Population Analysis
+
+## Section 4: Population Scale Analysis
+
+One sample is obviously not enough to know what is happening in a population. You are interested in assessing genetic differences on a population scale.
+
+**Q13. Read this file into R and determine the sample size for each genotype and their corresponding median expression levels for each of these genotypes.**
+
+```{r}
+expr <- read.table("rs8067378_ENSG00000172057.6.txt")
+head(expr)
+```
+
+***Q13. How many samples do we have?***
+
+```{r}
+nrow(expr)
+```
+
+**Sample size of genotypes and summary of expr:**
+
+```{r}
+table(expr$geno)
+```
+
+```{r}
+summary(expr)
+```
+
+***Q13. Let's examine the three genotypes to find the median expression levels for each:***
+
+```{r}
+inden <- expr$geno == "G/G"
+summary(expr[inden, "exp"])
+```
+
+```{r}
+inden <- expr$geno == "A/A"
+summary(expr[inden, "exp"])
+```
+
+```{r}
+inden <- expr$geno == "A/G"
+summary(expr[inden, "exp"])
+```
+
+***Q14: Generate a boxplot with a box per genotype***
+
+Let's make a boxplot:
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ggplot(expr) + aes(geno, exp) +
+  geom_boxplot()
+```
+
+Let's make the boxplot nicer and easier to understand:
+
+```{r}
+ggplot(expr) + aes(geno, exp, fill = geno) +
+  geom_boxplot(notch = T)
+```
+***Q14. What could you infer from the relative expression value between A/A and G/G displayed in this plot? Does the SNP effect the expression of ORMDL3?***
+
+The relative expression values between A/A and G/G show that the A/A genotype has the highest expression of ORMDL3, while G/G has the lowest expression of ORMDL3. This trend suggests that the SNP does affect the expression of ORMDL3, where the G allele is associated with lower expression levels.
+
+
+
+
+
+
+
+
