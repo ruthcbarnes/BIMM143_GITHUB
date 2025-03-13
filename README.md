@@ -4,7 +4,7 @@ This is the repository of my classwork from WI25 [BIMM143](https://bioboot.githu
 
 ## Index of Material
 
-Introduction to RStudio https://htmlpreview.github.io/?
+### Introduction to RStudio
 
 Class 4 - [Bioinformatics data analysis with R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class04Rstudio/Class04.html)
 
@@ -12,11 +12,11 @@ Class 5 - [Data exploration and visualization in R](https://htmlpreview.github.i
 
 Class 6 - [R functions and R packages from CRAN and BioConductor](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class06/Class06-R_functions.html)
 
-Introduction to Machine Learning
+### Introduction to Machine Learning
 
 Class 7 - [Introduction to machine learning for Bioinformatics](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class07/Class07.html)
 
-Mini-Projects
+### Mini-Projects
 
 Class 8 - [Unsupervised Learning Mini-Project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class08/Class08.html)
 
@@ -24,7 +24,7 @@ Class 9 - [Halloween Candy Mini-Project](https://htmlpreview.github.io/?https://
 
 Class 14 - [RNA-Seq analysis Mini-Project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2014/Class14.html)
 
-Introduction to Structural Bioinformatics
+### Introduction to Structural Bioinformatics
 
 Class 10 - [Structural Bioinformatics (pt1)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class10/Class10.html)
 
