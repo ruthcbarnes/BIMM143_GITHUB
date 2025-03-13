@@ -1,0 +1,61 @@
+---
+title: "Class 19: Mini Project: Cancer Mutation Analysis"
+author: "Ruth Barnes: A16747659"
+format: html
+---
+
+Q1. Read fastq
+
+```{r}
+library(bio3d)
+
+s <- read.fasta("A16747659_mutant_seq.fa")
+print(s)
+```
+
+Q2. Score conservation per position
+```{r}
+score <- conserv(s)
+```
+
+```{r}
+positions <- which(score != 1)
+positions
+```
+
+```{r}
+s$ali[,positions]
+```
+
+```{r}
+residues <- s$ali[,positions]
+```
+
+```{r}
+paste(residues[,1], positions, residues[,2], sep="")
+```
+
+Q3. Online
+
+Q4. Online
+
+```{r, warning=F}
+cif.file <- "~/Downloads/Class_19files/fold_wt_healthy_egfr/fold_wt_healthy_egfr_model_0.cif"
+x <- read.cif(cif.file)
+write.pdb(x, file="AF_model.pdb")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
