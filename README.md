@@ -24,6 +24,10 @@ Class 9 - [Halloween Candy Mini-Project](https://htmlpreview.github.io/?https://
 
 Class 14 - [RNA-Seq analysis Mini-Project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2014/Class14.html)
 
+Class 17 - [Analyzing sequencing data in the cloud](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class17/Class17_extracredit.html)
+
+Class 18 - [Mini Project: Investigating Pertussis Resurgence](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class18/Class18.html)
+
 ### Introduction to Structural Bioinformatics
 
 Class 10 - [Structural Bioinformatics (pt1)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class10/Class10.html)
@@ -31,6 +35,10 @@ Class 10 - [Structural Bioinformatics (pt1)](https://htmlpreview.github.io/?http
 Class 12 - [Genome informatics](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2012/HW%20Class12%20.html)
 
 Class 13 - [Transcriptomics and the analysis of RNA-Seq data](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2013/Class%2013.html)
+
+### Project
+
+Find a Gene Project - 
 
 
 
