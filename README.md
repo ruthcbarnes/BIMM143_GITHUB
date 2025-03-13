@@ -8,7 +8,7 @@ Introduction to RStudio https://htmlpreview.github.io/?
 
 Class 4 - [Bioinformatics data analysis with R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class04Rstudio/Class04.html)
 
-Class 5 - [Data exploration and visualization in R](https://github.com/ruthcbarnes/BIMM143_GITHUB/blob/main/Class05/Class05.pdf)
+Class 5 - [Data exploration and visualization in R](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class05/Class05.html)
 
 Class 6 - [R functions and R packages from CRAN and BioConductor](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class06/Class06-R_functions.html)
 
@@ -22,15 +22,15 @@ Class 8 - [Unsupervised Learning Mini-Project](https://htmlpreview.github.io/?ht
 
 Class 9 - [Halloween Candy Mini-Project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class09/Class09.html)
 
-Class 14 - [RNA-Seq analysis Mini-Project](https://github.com/ruthcbarnes/BIMM143_GITHUB/blob/main/Class%2014/Class14.pdf)
+Class 14 - [RNA-Seq analysis Mini-Project](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2014/Class14.html)
 
 Introduction to Structural Bioinformatics
 
 Class 10 - [Structural Bioinformatics (pt1)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class10/Class10.html)
 
-Class 12 - [Genome informatics](https://github.com/ruthcbarnes/BIMM143_GITHUB/blob/main/Class%2012/HW-Class12-.pdf)
+Class 12 - [Genome informatics](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2012/HW%20Class12%20.html)
 
-Class 13 - [Transcriptomics and the analysis of RNA-Seq data](https://github.com/ruthcbarnes/BIMM143_GITHUB/blob/main/Class%2013/Class-13.pdf)
+Class 13 - [Transcriptomics and the analysis of RNA-Seq data](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2013/Class%2013.html)
 
 
 
