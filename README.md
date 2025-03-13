@@ -36,10 +36,6 @@ Class 12 - [Genome informatics](https://htmlpreview.github.io/?https://raw.githu
 
 Class 13 - [Transcriptomics and the analysis of RNA-Seq data](https://htmlpreview.github.io/?https://raw.githubusercontent.com/ruthcbarnes/BIMM143_GITHUB/refs/heads/main/Class%2013/Class%2013.html)
 
-### Project
-
-Find a Gene Project - 
-
 
 
 
